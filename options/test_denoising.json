@@ -1,0 +1,62 @@
+{
+  "task": "test_color" // taskname
+  ,
+  "gpu_ids": [ // gpu id
+    0
+  ],
+  "path": {
+    "root": "debug/denoising",
+//    "pretrained_netG": "debug/denoising/train/models_all_pig_33.08/" // test pig
+    "pretrained_netG": "debug/denoising/train/models_LDCT_L004_test_33.91/"  // test Mayo L081
+  },
+  "data": {
+    "type": "denoising",
+    "n_channels": 1, // image channels
+    "train": {},
+    "test": {
+      "dataroot_H": "~/data/denoising/L081_NDCT",  // NDCT path L081
+      "dataroot_L": "~/data/denoising/L081_LDCT"   // LDCT path
+
+//      "dataroot_H": "C:\\Users\\Admin\\data\\denoising\\WED_One_clean",  // NDCT path L081
+//      "dataroot_L": "C:\\Users\\Admin\\data\\denoising\\WED_One_noise"   // LDCT path
+
+//      "dataroot_H": "~/data/denoising/L081_NDCT",  // NDCT path  Clinic
+//      "dataroot_L": "~/data/denoising/Clinic_LDCT_YRB"   // LDCT path
+
+//      "dataroot_H": "~/data/denoising/yrb_pig/test/clean",  // NDCT path rat
+//      "dataroot_L": "~/data/denoising/yrb_pig/test/noisy_75"   // LDCT path
+
+    }
+  },
+  "netG": {
+    "d_size": 5, // dictionary size
+    "fix_d": false,
+    "n_iter": 4, // stages
+    "in_nc": 1, // image channel
+    "nc_x": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "nb": 4 // number of blocks
+  },
+  "train": {
+    "reload_broadcast": false,
+    "G_optimizer_lr": 1e-6, // lr
+    "G_scheduler_milestones": [ // milestones
+      200000,
+      400000,
+      600000,
+      800000
+    ],
+    "G_scheduler_gamma": 0.5,
+    "checkpoint_test": 5000,
+    "checkpoint_savemodel": 5000,
+    "checkpoint_log": 100,
+    "checkpoint_saveimage": 5000
+  },
+  "test": {
+    "visualize": true
+  }
+}

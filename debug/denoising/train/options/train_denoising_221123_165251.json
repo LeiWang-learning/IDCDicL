@@ -1,0 +1,76 @@
+{
+  "task": "train",
+  "gpu_ids": [
+    0
+  ],
+  "path": {
+    "root": "debug/denoising",
+    "pretrained_netG": "debug/denoising/train/models_LDCT_pig_val_32.81/",
+    "task": "debug/denoising\\train",
+    "log": "debug/denoising\\train",
+    "options": "debug/denoising\\train\\options",
+    "models": "debug/denoising\\train\\models",
+    "images": "debug/denoising\\train\\images"
+  },
+  "data": {
+    "type": "denoising",
+    "n_channels": 1,
+    "train": {
+      "dataroot_H": "C:\\Users\\Admin/data/denoising/yrb_pig/train/clean_all/",
+      "dataroot_L": "C:\\Users\\Admin/data/denoising/yrb_pig/train/noise_all/",
+      "H_size": 128,
+      "num_workers": 0,
+      "batch_size": 4,
+      "type": "denoising",
+      "phase": "train",
+      "scale": 1,
+      "n_channels": 1
+    },
+    "test": {
+      "dataroot_H": "C:\\Users\\Admin/data/denoising/yrb_pig/validation/300ma",
+      "dataroot_L": "C:\\Users\\Admin/data/denoising/yrb_pig/validation/150ma",
+      "type": "denoising",
+      "phase": "test",
+      "scale": 1,
+      "n_channels": 1
+    },
+    "scale": 1
+  },
+  "netG": {
+    "d_size": 5,
+    "n_iter": 4,
+    "in_nc": 1,
+    "nc_x": [
+      64,
+      128,
+      256,
+      512
+    ],
+    "nb": 4,
+    "type": "denoising",
+    "out_nc": 1,
+    "scale": 1
+  },
+  "train": {
+    "manual_seed": 0,
+    "reload_broadcast": false,
+    "G_optimizer_lr": 0.0001,
+    "G_scheduler_milestones": [
+      2000,
+      4000,
+      6000,
+      8000
+    ],
+    "G_scheduler_gamma": 0.5,
+    "checkpoint_test": 100,
+    "checkpoint_savemodel": 100,
+    "checkpoint_log": 100,
+    "checkpoint_saveimage": 100,
+    "checkpoint_visual": 100
+  },
+  "test": {
+    "visualize": true
+  },
+  "opt_path": "options/train_denoising.json",
+  "is_train": true
+}
